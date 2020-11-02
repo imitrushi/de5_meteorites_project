@@ -1,0 +1,2 @@
+"0","meteorite_landings_clean <- meteorite_landings_clean %>% "
+"0","  rename(mass_g = ""mass (g)"", geo_location = GeoLocation)"

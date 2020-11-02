@@ -1,0 +1,6 @@
+"0","geolocation_data_validation <- function(geolocation){"
+"0","  # valid geolocation values"
+"0","  geolocation %>% "
+"0","    verify(meteorite_landings_clean$latitude > -90 & meteorite_landings_clean$latitude < 90) %>% "
+"0","    verify(meteorite_landings_clean$longitude > -180 & meteorite_landings_clean$longitude < 180)"
+"0","}"

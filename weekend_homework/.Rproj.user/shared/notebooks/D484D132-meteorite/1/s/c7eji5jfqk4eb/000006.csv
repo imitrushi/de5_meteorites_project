@@ -1,0 +1,2 @@
+"0","meteorite_landings_clean <- meteorite_landings_clean %>% "
+"0","  separate(geo_location, c(""latitude"", ""longitude""), sep = "","")"

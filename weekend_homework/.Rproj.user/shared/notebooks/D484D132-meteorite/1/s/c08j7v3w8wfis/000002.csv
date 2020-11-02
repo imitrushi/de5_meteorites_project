@@ -1,0 +1,3 @@
+"0","meteorite_landings_clean <- meteorite_landings_clean %>% "
+"0","  mutate(geo_location = str_replace(geo_location, pattern = ""\\("", replacement = """")) %>% "
+"0","  mutate(geo_location = str_replace(geo_location, pattern = ""\\)"", replacement = """"))"

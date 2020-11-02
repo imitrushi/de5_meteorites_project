@@ -1,0 +1,4 @@
+"0","mean_mass_falling <- meteorite_landings %>% "
+"0","  filter(fall == ""Fell"") %>%"
+"0","    summarise(average_mass_fell = mean(mass_g))"
+"0","    "

@@ -1,0 +1,116 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+  
+  
+```{r}
+library(tidyverse)
+```
+  
+```{r}
+meteorite_landings_clean <- read_csv("meteorite_landings.csv")
+```
+  
+  
+```{r}
+meteorite_landings_clean <- meteorite_landings_clean %>% 
+  rename(mass_g = "mass (g)", geo_location = GeoLocation)
+```
+  
+```{r}
+meteorite_landings_clean <- meteorite_landings_clean %>% 
+  mutate(geo_location = str_replace(geo_location, pattern = "\\(", replacement = "")) %>% 
+  mutate(geo_location = str_replace(geo_location, pattern = "\\)", replacement = ""))
+```
+  
+  
+  
+  
+```{r}
+meteorite_landings_clean <- meteorite_landings_clean %>% 
+  separate(geo_location, c("latitude", "longitude"), sep = ",")
+```
+
+
+```{r}
+meteorite_landings_clean <- meteorite_landings_clean %>% 
+  mutate(latitude = as.numeric(latitude)) %>% 
+  mutate(longitude = as.numeric(longitude))
+```
+
+```{r}
+meteorite_landings_clean <-meteorite_landings_clean %>%
+  mutate(latitude = coalesce(latitude, 0)) %>% 
+  mutate(longitude = coalesce(longitude, 0))
+```
+
+```{r}
+meteorite_landings_clean <- meteorite_landings_clean %>% 
+  filter(mass_g < 1000) %>% 
+  group_by(year) %>% 
+  arrange(year)
+```
+
+
+```{r}
+install.packages("assertr")
+library(assertr)
+```
+  
+
+
+
+```{r}
+geolocation_data_validation <- function(geolocation){
+  # valid geolocation values
+  geolocation %>% 
+    verify(meteorite_landings_clean$latitude > -90 & meteorite_landings_clean$latitude < 90) %>% 
+    verify(meteorite_landings_clean$longitude > -180 & meteorite_landings_clean$longitude < 180)
+}
+```
+
+
+```{r}
+write_csv(meteorite_landings_clean, "meteorite_landings_clean.csv")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
